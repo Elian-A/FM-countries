@@ -1,3 +1,4 @@
+import Filter from "@/components/Filter";
 import Layout from "@/components/Layout";
 import { useGetAllCountries } from "@/hooks/countries";
 import { NextPage } from "next";
@@ -8,17 +9,7 @@ const Home: NextPage = () => {
   if (isError) return <p>Error...</p>;
   return (
     <Layout title="What in the world | Home">
-      <form className="">
-        <input type="text" placeholder="Search for a country" />
-        <select name="region" id="region">
-          <option>Filter by Region</option>
-          <option value="africa">Africa</option>
-          <option value="america">America</option>
-          <option value="asia">Asia</option>
-          <option value="europe">Europe</option>
-          <option value="oceania">Oceania</option>
-        </select>
-      </form>
+      <Filter />
       <div>
         {countries.map((country) => {
           const {
