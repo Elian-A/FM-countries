@@ -1,9 +1,11 @@
 import { filterStore } from "@/store/filter";
 import { ChangeEventHandler } from "react";
-import { useStore } from "zustand";
 
 const Filter = () => {
-  const { setRegion, setSearch } = useStore(filterStore);
+  const { setRegion, setSearch } = filterStore((state) => ({
+    setRegion: state.setRegion,
+    setSearch: state.setSearch,
+  }));
   const handleSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearch(e.target.value);
   };
