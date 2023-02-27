@@ -1,9 +1,10 @@
 import { useGetAllCountries } from "@/hooks/countries";
 import CountryCard from "./CountryCard";
-const CountriesList = () => {
+const Countries = () => {
   const { data: countries, isLoading, isError } = useGetAllCountries();
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error...</p>;
+
   return (
     <div>
       {countries.map((country) => (
@@ -13,4 +14,4 @@ const CountriesList = () => {
   );
 };
 
-export default CountriesList;
+export default Countries;
