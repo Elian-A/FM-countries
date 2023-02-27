@@ -5,3 +5,6 @@ const countries = axios.create({
 });
 
 export const getAllCountries = async () => await countries.get("/all");
+
+export const getCountriesByRegion = async (region: string) =>
+  await countries.get(`/region/${region}`);
