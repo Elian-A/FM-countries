@@ -8,3 +8,6 @@ export const getAllCountries = async () => await countries.get("/all");
 
 export const getCountriesByRegion = async (region: string) =>
   await countries.get(`/region/${region}`);
+
+export const getCountry = async (name: string) =>
+  await countries.get(`/name/${name}`);
