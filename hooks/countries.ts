@@ -47,12 +47,16 @@ const countriesParser = z.array(countryParser);
 
 export type Country = z.infer<typeof countryParser>;
 
-export const useGetAllCountries = () =>
-  useQuery(["countries"], async () => {
-    const res = await getAllCountries();
-    const parsedRes = countriesParser.parse(res.data);
-    return parsedRes;
-  });
+export const useGetAllCountries = (countries: Country[]) =>
+  useQuery(
+    ["countries"],
+    async () => {
+      const res = await getAllCountries();
+      const parsedRes = countriesParser.parse(res.data);
+      return parsedRes;
+    },
+    { initialData: countries }
+  );
 
 export const useGetCountriesByRegion = (region: string) =>
   useQuery(["countries", region], async () => {
