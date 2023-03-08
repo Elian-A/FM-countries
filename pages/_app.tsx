@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Nunito_Sans } from "@next/font/google";
+import { ThemeProvider } from "@/context/theme";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -16,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={`${nunitoSans.className}`}>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>
     </div>
