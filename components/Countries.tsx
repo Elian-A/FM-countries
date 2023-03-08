@@ -11,7 +11,7 @@ const Countries = () => {
     searchFilter !== "" ? filterCountries(searchFilter, countries) : countries;
 
   return (
-    <div>
+    <div className="countriesGrid">
       {filteredCountries.map((country) => (
         <CountryCard key={country.name.common} country={country} />
       ))}

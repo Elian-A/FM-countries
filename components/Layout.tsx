@@ -12,7 +12,7 @@ const Layout: FC<{
         <title>{title}</title>
       </Head>
       <Header />
-      <main>{children}</main>
+      <main className="bg-neutral-200 min-h-screen">{children}</main>
     </>
   );
 };

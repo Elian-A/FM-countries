@@ -2,15 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-    --clr-neutral-100:hsl(0, 0%, 100%); /*Dark Mode Text & Light Mode Elements*/
-    --clr-neutral-200:hsl(0, 0%, 98%); /*Light Mode Background*/
-    --clr-neutral-300:hsl(0, 0%, 52%); /*Light Mode Input*/
-    --clr-neutral-700:hsl(209, 23%, 22%); /*Dark Mode Elements*/
-    --clr-neutral-800:hsl(207, 26%, 17%); /*Dark Mode Background*/
-    --clr-neutral-900:hsl(200, 15%, 8%); /*Light Mode Text*/
-    
-    --fs-small: .875rem; /*Homepage Items*/
-    --fs-medium: 1rem; /*Detail Page*/
+:root {
+  --clr-neutral-100: hsl(0, 0%, 100%); /*Dark Mode Text & Light Mode Elements*/
+  --clr-neutral-200: hsl(0, 0%, 98%); /*Light Mode Background*/
+  --clr-neutral-300: hsl(0, 0%, 52%); /*Light Mode Input*/
+  --clr-neutral-700: hsl(209, 23%, 22%); /*Dark Mode Elements*/
+  --clr-neutral-800: hsl(207, 26%, 17%); /*Dark Mode Background*/
+  --clr-neutral-900: hsl(200, 15%, 8%); /*Light Mode Text*/
 
+  --fs-small: 0.875rem; /*Homepage Items*/
+  --fs-medium: 1rem; /*Detail Page*/
+}
+
+.countriesGrid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 270px));
+  gap: 3rem;
+  padding-inline: 3rem;
 }
