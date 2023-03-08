@@ -3,15 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --clr-neutral-100: hsl(0, 0%, 100%); /*Dark Mode Text & Light Mode Elements*/
-  --clr-neutral-200: hsl(0, 0%, 98%); /*Light Mode Background*/
-  --clr-neutral-300: hsl(0, 0%, 52%); /*Light Mode Input*/
-  --clr-neutral-700: hsl(209, 23%, 22%); /*Dark Mode Elements*/
-  --clr-neutral-800: hsl(207, 26%, 17%); /*Dark Mode Background*/
-  --clr-neutral-900: hsl(200, 15%, 8%); /*Light Mode Text*/
+  --clr-element: hsl(0, 0%, 100%); /*Light Mode Elements*/
+  --clr-background: hsl(0, 0%, 98%); /*Light Mode Background*/
+  --clr-input: hsl(0, 0%, 52%); /*Light Mode Input*/
+  --clr-text: hsl(200, 15%, 8%); /*Light Mode Text*/
 
   --fs-small: 0.875rem; /*Homepage Items*/
   --fs-medium: 1rem; /*Detail Page*/
+}
+
+.dark {
+  --clr-text: hsl(0, 0%, 100%);
+  --clr-background: hsl(207, 26%, 17%); /*Dark Mode Background*/
+  --clr-element: hsl(209, 23%, 22%); /*Dark Mode Elements*/
 }
 
 .countriesGrid {

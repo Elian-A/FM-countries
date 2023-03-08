@@ -26,4 +26,4 @@ export const ThemeProvider: FC<{ children: ReactElement }> = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(themeContext);
+export const useThemeContext = () => useContext(themeContext);

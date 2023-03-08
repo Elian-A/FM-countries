@@ -14,7 +14,7 @@ const CountryCard: FC<{ country: Country }> = ({ country }) => {
           <Image src={flags.png} alt={alt} fill />
         </div>
       </Link>
-      <div className="bg-white px-5 pt-6 pb-11 grid gap-5">
+      <div className="bg-theme-element px-5 pt-6 pb-11 grid gap-5">
         <h3 className="text-xl font-bold">{name.common}</h3>
         <ul className="grid gap-1">
           <li>
