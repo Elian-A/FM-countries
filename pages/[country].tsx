@@ -1,6 +1,8 @@
+import { getCountry } from "@/api/countries";
 import Layout from "@/components/Layout";
 import { useGetCountry } from "@/hooks/countries";
-import { NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import countriesNames from "../countriesNames.json";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -122,6 +124,23 @@ const Country: NextPage = () => {
       </div>
     </Layout>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: countriesNames.map((name) => ({ params: { country: name } })),
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  try {
+    const data = await getCountry(context.params?.id as string);
+    const country = data.data;
+    return { props: { countries: country } };
+  } catch (error) {
+    return { props: {} };
+  }
 };
 
 export default Country;
