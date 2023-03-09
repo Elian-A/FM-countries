@@ -5,13 +5,12 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import countriesNames from "../countriesNames.json";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import CountryInfo from "@/components/CountryInfo";
+import Arrow from "@/components/Svg/Arrow";
 
 const CountryPage: NextPage<{ serverSideFetchedCountry: Country }> = ({
   serverSideFetchedCountry,
 }) => {
-  const { query } = useRouter();
   const {
     data: country,
     isError,
@@ -29,14 +28,18 @@ const CountryPage: NextPage<{ serverSideFetchedCountry: Country }> = ({
 
   return (
     <Layout title={`Where in the world? | ${name.common}`}>
-      <div>
-        <Link href="/">&lt;- Back</Link>
-      </div>
-      <div>
-        <div className="relative h-32">
-          <Image src={flag.png} alt={alt} fill priority />
+      <div className="px-6 flex flex-col gap-16 py-10 min-h-main">
+        <div className="px-5 py-2 bg-theme-element shadow-lg w-fit">
+          <Link href="/" className="flex items-center gap-2">
+            <Arrow /> Back
+          </Link>
         </div>
-        <CountryInfo country={country} />
+        <div className="grid gap-10 lg:grid-cols-2">
+          <div className="relative w-full max-w-[450px] mx-auto h-56 lg:max-w-[600px] lg:h-[400px]">
+            <Image src={flag.png} alt={alt} fill priority />
+          </div>
+          <CountryInfo country={country} />
+        </div>
       </div>
     </Layout>
   );

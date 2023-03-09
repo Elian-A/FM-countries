@@ -22,6 +22,10 @@ module.exports = {
         small: "var(--fs-small)",
         medium: "var(--fs-medium)",
       },
+      minHeight: {
+        header: "var(--header-h)",
+        main: "var(--main-h)",
+      },
     },
   },
   plugins: [],

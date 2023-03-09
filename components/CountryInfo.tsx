@@ -14,82 +14,80 @@ const CountryInfo: FC<{ country: Country }> = ({ country }) => {
     tld,
   } = country;
   const { common, nativeName } = name;
+  const topItemList = [
+    {
+      title: "Native Name",
+      value: nativeName
+        ? Object.values(nativeName)[0].common
+        : "No native name found",
+    },
+    {
+      title: "Population",
+      value: population.toLocaleString(),
+    },
+    {
+      title: "Region",
+      value: region,
+    },
+    {
+      title: "Sub Region",
+      value: subregion ? subregion : "No subregion found",
+    },
+    {
+      title: "Capital",
+      value: capital ? capital.join(", ") : "No capital found",
+    },
+  ];
+  const bottomItemList = [
+    {
+      title: "Top Level Domain",
+      value: tld ? tld : "No top level domain found",
+    },
+    {
+      title: "Currencies",
+      value: currencies
+        ? Object.values(currencies)[0].name
+        : "No currencies found",
+    },
+    {
+      title: "Languages",
+      value: languages
+        ? Object.values(languages).join(", ")
+        : "No language found",
+    },
+  ];
   return (
-    <div>
-      <h2>{common}</h2>
-      <div>
-        <ul>
-          <li>
-            <p>
-              <b>Native Name: </b>
-              <span>
-                {nativeName
-                  ? Object.values(nativeName)[0].common
-                  : "No native name found"}
-              </span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <b>Population: </b>
-              <span>{population} </span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <b>Region: </b>
-              <span>{region} </span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <b>Sub Region: </b>
-              <span>{subregion ? subregion : "No subregion found"} </span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <b>Capital: </b>
-              <span>{capital ? capital.join(", ") : "No capital found"}</span>
-            </p>
-          </li>
+    <div className="grid gap-6">
+      <h2 className="font-bold text-3xl">{common}</h2>
+      <div className="grid gap-10 lg:grid-cols-2">
+        <ul className="grid gap-2">
+          {topItemList.map(({ title, value }) => (
+            <li key={title} className="flex gap-2 text-lg">
+              <span className="font-semibold">{title}:</span>
+              <span>{value}</span>
+            </li>
+          ))}
         </ul>
-        <ul>
-          <li>
-            <p>
-              <b>Top Level Domain: </b>
-              <span>{tld ? tld : "No top level domain found"} </span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <b>Currencies: </b>
-              <span>
-                {currencies
-                  ? Object.values(currencies)[0].name
-                  : "No currencies found"}
-              </span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <b>Languages: </b>
-              <span>
-                {languages
-                  ? Object.values(languages).join(", ")
-                  : "No language found"}
-              </span>
-            </p>
-          </li>
+        <ul className="flex gap-2 flex-col">
+          {bottomItemList.map(({ title, value }) => (
+            <li key={title} className="flex h-fit gap-2 text-lg">
+              <span className="font-semibold">{title}:</span>
+              <span>{value}</span>
+            </li>
+          ))}
         </ul>
       </div>
-      <div>
-        <span>
-          <b>Border Countries: </b>
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-4">
+        <h3 className="text-xl font-semibold">Border Countries: </h3>
+        <div className="flex flex-wrap gap-3">
           {borders
-            ? borders.map((border) => <div key={border}>{border}</div>)
+            ? borders.map((border) => (
+                <div key={border} className="px-8 py-1 h-fit bg-theme-element">
+                  {border}
+                </div>
+              ))
             : "No border countries found"}
-        </span>
+        </div>
       </div>
     </div>
   );

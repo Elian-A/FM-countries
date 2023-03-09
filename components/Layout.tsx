@@ -16,7 +16,7 @@ const Layout: FC<{
       <div className={`${theme ? "dark" : ""}`}>
         <Header theme={theme} setTheme={setTheme} />
         <p>{theme}</p>
-        <main className=" bg-theme-background min-h-screen text-theme-text">
+        <main className=" bg-theme-background min-h-main text-theme-text">
           {children}
         </main>
       </div>

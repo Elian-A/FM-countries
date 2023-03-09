@@ -10,6 +10,9 @@
 
   --fs-small: 0.875rem; /*Homepage Items*/
   --fs-medium: 1rem; /*Detail Page*/
+
+  --header-h: 72px;
+  --main-h: calc(100vh - var(--header-h));
 }
 
 .dark {

@@ -20,7 +20,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider>
           <Component {...pageProps} />
         </ThemeProvider>
-        <ReactQueryDevtools />
       </QueryClientProvider>
     </div>
   );

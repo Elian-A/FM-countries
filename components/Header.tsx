@@ -7,7 +7,7 @@ const Header: FC<{
   theme: boolean;
 }> = ({ setTheme, theme }) => {
   return (
-    <header className="bg-theme-element text-theme-text flex justify-between px-4 py-6 shadow-lg">
+    <header className="min-h-header bg-theme-element text-theme-text flex justify-between px-4 py-6 shadow-lg">
       <h1 className="font-bold">Where in the world?</h1>
       <button
         className="flex gap-2 items-center"
