@@ -72,9 +72,13 @@ export const useGetCountriesByRegion = (
     { initialData: serverFetchedCoutntries }
   );
 
-export const useGetCountry = (name: string) =>
-  useQuery(["country", name], async () => {
-    const res = await getCountry(name);
-    const parsedRes = countryParser.parse(res.data[0]);
-    return parsedRes;
-  });
+export const useGetCountry = (name: string, country: Country) =>
+  useQuery(
+    ["country", name],
+    async () => {
+      const res = await getCountry(name);
+      const parsedRes = countryParser.parse(res.data[0]);
+      return parsedRes;
+    },
+    { initialData: country }
+  );

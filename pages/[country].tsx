@@ -1,40 +1,34 @@
 import { getCountry } from "@/api/countries";
 import Layout from "@/components/Layout";
-import { useGetCountry } from "@/hooks/countries";
+import { Country, useGetCountry } from "@/hooks/countries";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import countriesNames from "../countriesNames.json";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import CountryInfo from "@/components/CountryInfo";
 
-const Country: NextPage = () => {
+const CountryPage: NextPage<{ serverSideFetchedCountry: Country }> = ({
+  serverSideFetchedCountry,
+}) => {
   const { query } = useRouter();
   const {
     data: country,
     isError,
     isLoading,
-  } = useGetCountry(query.country as string);
+  } = useGetCountry(
+    serverSideFetchedCountry.name.common,
+    serverSideFetchedCountry
+  );
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error...</p>;
 
-  const {
-    name,
-    flags: flag,
-    population,
-    region,
-    subregion,
-    borders,
-    capital,
-    currencies,
-    languages,
-    tld,
-  } = country;
-  const { common, nativeName } = name;
-  const alt = flag.alt ? flag.alt : `The ${common} flag`;
+  const { name, flags: flag } = country;
+  const alt = flag.alt ? flag.alt : `The ${name.common} flag`;
 
   return (
-    <Layout title={`Where in the world? | ${common}`}>
+    <Layout title={`Where in the world? | ${name.common}`}>
       <div>
         <Link href="/">&lt;- Back</Link>
       </div>
@@ -42,85 +36,7 @@ const Country: NextPage = () => {
         <div className="relative h-32">
           <Image src={flag.png} alt={alt} fill priority />
         </div>
-        <div>
-          <h2>{common}</h2>
-          <div>
-            <ul>
-              <li>
-                <p>
-                  <b>Native Name: </b>
-                  <span>
-                    {nativeName
-                      ? Object.values(nativeName)[0].common
-                      : "No native name found"}
-                  </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <b>Population: </b>
-                  <span>{population} </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <b>Region: </b>
-                  <span>{region} </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <b>Sub Region: </b>
-                  <span>{subregion ? subregion : "No subregion found"} </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <b>Capital: </b>
-                  <span>
-                    {capital ? capital.join(", ") : "No capital found"}
-                  </span>
-                </p>
-              </li>
-            </ul>
-            <ul>
-              <li>
-                <p>
-                  <b>Top Level Domain: </b>
-                  <span>{tld ? tld : "No top level domain found"} </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <b>Currencies: </b>
-                  <span>
-                    {currencies
-                      ? Object.values(currencies)[0].name
-                      : "No currencies found"}
-                  </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <b>Languages: </b>
-                  <span>
-                    {languages
-                      ? Object.values(languages).join(", ")
-                      : "No language found"}
-                  </span>
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <span>
-              <b>Border Countries: </b>
-              {borders
-                ? borders.map((border) => <div key={border}>{border}</div>)
-                : "No border countries found"}
-            </span>
-          </div>
-        </div>
+        <CountryInfo country={country} />
       </div>
     </Layout>
   );
@@ -134,13 +50,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  try {
-    const data = await getCountry(context.params?.id as string);
-    const country = data.data;
-    return { props: { countries: country } };
-  } catch (error) {
-    return { props: {} };
-  }
+  const data = await getCountry(context.params?.country as string);
+  const country = data.data[0];
+  return { props: { serverSideFetchedCountry: country } };
 };
 
-export default Country;
+export default CountryPage;
