@@ -1,15 +1,18 @@
-import { useGetCountriesByRegion } from "@/hooks/countries";
+import { Country, useGetCountriesByRegion } from "@/hooks/countries";
 import { filterStore } from "@/store/filter";
 import { filterCountries } from "@/utils/filterCountries";
 import { FC } from "react";
 import CountryCard from "./CountryCard";
 
-const CountriesByRegion: FC<{ region: string }> = ({ region }) => {
+const CountriesByRegion: FC<{
+  region: string;
+  serverFetchedCountries: Country[];
+}> = ({ region, serverFetchedCountries }) => {
   const {
     data: countries,
     isError,
     isLoading,
-  } = useGetCountriesByRegion(region);
+  } = useGetCountriesByRegion(region, serverFetchedCountries);
   const searchFilter = filterStore((store) => store.search);
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error...</p>;

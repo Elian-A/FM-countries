@@ -58,12 +58,19 @@ export const useGetAllCountries = (countries: Country[]) =>
     { initialData: countries }
   );
 
-export const useGetCountriesByRegion = (region: string) =>
-  useQuery(["countries", region], async () => {
-    const res = await getCountriesByRegion(region);
-    const parsedRes = countriesParser.parse(res.data);
-    return parsedRes;
-  });
+export const useGetCountriesByRegion = (
+  region: string,
+  serverFetchedCoutntries: Country[]
+) =>
+  useQuery(
+    ["countries", region],
+    async () => {
+      const res = await getCountriesByRegion(region);
+      const parsedRes = countriesParser.parse(res.data);
+      return parsedRes;
+    },
+    { initialData: serverFetchedCoutntries }
+  );
 
 export const useGetCountry = (name: string) =>
   useQuery(["country", name], async () => {

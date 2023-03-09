@@ -12,7 +12,7 @@ const Home: NextPage<{ countries: Country[] }> = ({ countries }) => {
     <Layout title="What in the world | Home">
       <Filter />
       {region !== "" ? (
-        <CountriesByRegion region={region} />
+        <CountriesByRegion region={region} serverFetchedCountries={countries} />
       ) : (
         <Countries serverFetchedCountries={countries} />
       )}
@@ -23,6 +23,7 @@ export default Home;
 
 export async function getStaticProps() {
   const data = await getAllCountries();
-  const countries = data.data;
-  return { props: { countries } };
+  const countries = data.data as Country[];
+  const firstTwentyCountries = countries.filter((_, idx) => idx < 20);
+  return { props: { countries: firstTwentyCountries } };
 }
