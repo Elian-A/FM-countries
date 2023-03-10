@@ -1,7 +1,7 @@
 import { Country } from "@/hooks/countries";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FC } from "react";
+import { FC } from "react";
 
 const CountryCard: FC<{ country: Country }> = ({ country }) => {
   const { name, flags, population, capital: capitals, region } = country;
@@ -11,7 +11,12 @@ const CountryCard: FC<{ country: Country }> = ({ country }) => {
     <div className="shadow-lg rounded-lg overflow-auto max-w-[300px]">
       <Link href={`/${name.common}`}>
         <div className="relative h-32">
-          <Image src={flags.png} alt={alt} fill />
+          <Image
+            src={flags.png}
+            alt={alt}
+            fill
+            sizes="(min-width: 390px) 270px"
+          />
         </div>
       </Link>
       <div className="bg-theme-element px-5 pt-6 pb-11 grid gap-5">
