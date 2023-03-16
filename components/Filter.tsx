@@ -8,9 +8,11 @@ const Filter = () => {
     setSearch: state.setSearch,
   }));
   const handleSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
     setSearch(e.target.value);
   };
   const handleRegion: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    e.preventDefault();
     setRegion(e.target.value);
   };
   return (
